@@ -23,6 +23,7 @@ function largestConsecutiveSum (arrayOfInts) {
   return max;
 }
 
+console.log('first: ',largestConsecutiveSum([-2,2,-3]));
 
 function largestConsecutiveSum2 (arrayOfInts) {
 
@@ -31,6 +32,7 @@ function largestConsecutiveSum2 (arrayOfInts) {
 
   // recursive function
   function inner (array) {
+    console.log(array);
     if (array.length <= 1) return array[0] || 0;
     const min = Math.min(...array);
     if (min >= 0) return arraySum(array);
@@ -39,11 +41,18 @@ function largestConsecutiveSum2 (arrayOfInts) {
       right = array.slice(index+1);
     const leftS = arraySum(left),
       rightS = arraySum(right);
+      console.log(left,right);
     // check if the break makes sense, thus is left or right > left + right + array
     if (leftS + rightS + array[index] > leftS && leftS + rightS + array[index] > rightS) {
       return (leftS + rightS + array[index]);
     } else {
-      return leftS > rightS ? inner(left) : inner(right);
+      if (right.length === 0) {
+        return inner(left);
+      } else if (left.length ===0) {
+        return inner(right);
+      } else {
+        return leftS > rightS ? inner(left) : inner(right);
+      }
     }
   }
 };
@@ -52,4 +61,4 @@ function arraySum (array) {
   return array.reduce((res,el) => res + el,0);
 }
 
-console.log(largestConsecutiveSum2([5,5,-36,11,8,-10,9,15]));
+console.log(largestConsecutiveSum2([-3,2,-2]));
