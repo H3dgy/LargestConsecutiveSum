@@ -31,11 +31,9 @@ function largestConsecutiveSum2 (arrayOfInts) {
 
   // recursive function
   function inner (array) {
-    console.log('array: ',array);
     if (array.length <= 1) return array[0] || 0;
     const min = Math.min(...array);
     if (min >= 0) return arraySum(array);
-
     const index = array.indexOf(min),
       left = array.slice(0,index),
       right = array.slice(index+1);
@@ -51,7 +49,7 @@ function largestConsecutiveSum2 (arrayOfInts) {
 };
 
 function arraySum (array) {
-  return array.reduce((res,el) => res += el,0);
+  return array.reduce((res,el) => res + el,0);
 }
 
 console.log(largestConsecutiveSum2([5,5,-36,11,8,-10,9,15]));
